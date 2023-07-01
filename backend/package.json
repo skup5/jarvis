@@ -1,0 +1,14 @@
+{
+  "name": "jarvis-backend",
+  "version": "1.0.0-alfa",
+  "description": "Simple Raspberry Pi API for Jarvis",
+  "main": "main.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "deno run --watch --allow-net main.ts",
+    "start": "deno run --allow-net main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roman Zelenik",
+  "license": "ISC",
+}
