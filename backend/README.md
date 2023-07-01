@@ -35,16 +35,29 @@ typescript 5.0.4
 
 ### Run
 
+Run via project npm script:
 ```
-deno run main.js
+# Run in DEV mode
+npm run dev
+
+# Run in PROD mode
+npm run start
+```
+Or run Deno directly:
+```
+deno run --allow-net main.js
 
 # Watch mode
-deno run --watch main.js
+deno run --watch --allow-net main.js
 ```
 Official manual https://deno.com/manual@v1.33.3/getting_started/command_line_interface#watch-mode
 
 ### Testing
-
+Run via project npm script:
+```
+npm run test
+```
+Run tests directly via Deno:
 ```
 # Run all tests in the current directory and all sub-directories
 deno test
