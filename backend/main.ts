@@ -1,20 +1,32 @@
-// export const ledController = require("./LedController");
+import {
+  Req,
+  Res,
+  Router,
+  WebApp
+} from "https://deno.land/x/denorest@v4.2/mod.ts";
 
-import { serve } from "https://deno.land/std@0.187.0/http/server.ts";
+import { SensorController } from "./modules/sensor/sensor.controller.ts";
 
 // Jarvis backend server
-// @see https://deno.com/manual@v1.33.3/examples/http_server
+// @see https://deno.land/x/denorest@v4.2#examples
 
 
-const port = 8080;
+const app = new WebApp();
+const router = new Router();
+const port = Deno.args[0] ?? 8080;
 
-const handler = (request: Request): Response => {
-  const body = `Your user-agent is:\n\n${
-    request.headers.get("user-agent") ?? "Unknown"
-  }`;
+// '/' root url handler. Returns UI web page.
+router.get("/", (_req: Req, res: Res) => {
+  const sensorService = new SensorService();
 
-  return new Response(body, { status: 200 });
-};
+  res.reply = "Hello, I'm Jarvis\n"
+            + "continue to /sensors";
+});
 
-console.log(`HTTP webserver running. Access it at: http://localhost:${port}/`);
-await serve(handler, { port });
+// '/sensors?sensorName=<value>' api endpoint handler.
+router.get("/sensors", (_req: Req, res: Res) => {
+  new SensorController().handle(_req, res);
+});
+
+app.set(router);
+app.listen(port);

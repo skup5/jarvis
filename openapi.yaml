@@ -36,7 +36,7 @@ paths:
             text/html:
               schema:
                 type: string
-  /sensor:
+  /sensors:
     get:
       tags:
         - api
@@ -69,11 +69,15 @@ paths:
                   value:
                     - id: xxxxxxxx
                       name: dht11
+                      description: Teploměr a vlhkoměr
+                      location: Obývák
                 someSensor:
                   summary: Get details from sensor with the specific name
                   value:
                     - id: xxxxxxxx
                       name: dht11
+                      description: Teploměr a vlhkoměr
+                      location: Obývák
                       physicalQuantities:
                         - name: temperatur
                           value: "21"
@@ -651,6 +655,10 @@ components:
         id:
           type: string
         name:
+          type: string
+        description:
+          type: string
+        location:
           type: string
         physicalQuantities:
           type: array

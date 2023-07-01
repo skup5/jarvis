@@ -1,4 +1,4 @@
-# Jarvis backend RPi API
+  # Jarvis backend RPi API
 
 ## Structure
 
@@ -37,8 +37,11 @@ typescript 5.0.4
 
 Run via project npm script:
 ```
-# Run in DEV mode
+# Run in DEV mode (starts with file watcher)
 npm run dev
+
+# Run in DEBUG mode (starts without file watcher, you can connect with Chrome inspect debugger)
+npm run debug
 
 # Run in PROD mode
 npm run start
