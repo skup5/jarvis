@@ -1,4 +1,4 @@
-import { Sensor } from './sensor.dto.ts'
+import { Sensor } from './sensor.dto'
 export class SensorService {
 
   constructor() {}
