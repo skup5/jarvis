@@ -3,9 +3,10 @@
 ## Structure
 
 ```
-├── modules
-│   ├── <api_module_name>
-├── main.js
+├── src
+│   ├── modules
+│   │   └── <api_module_name>
+│   └── main.js
 ├── package.json
 ├── README.MD
 └── .gitignore
