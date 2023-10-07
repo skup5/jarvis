@@ -1,37 +1,30 @@
-import {
-  Req,
-  Res,
-  pathParse
-} from "https://deno.land/x/denorest@v4.2/mod.ts";
-
-import { SensorService } from "./sensor.service.ts"
+import {Params} from "@feathersjs/feathers";
+import {SensorService} from "./sensor.service.ts"
 
 export class SensorController {
-  
+
   private sensorService: SensorService;
 
-  constructor() {
-    this.sensorService = new SensorService();
+  constructor(sensorService: SensorService = new SensorService()) {
+    this.sensorService = sensorService
   }
 
   /**
-   * /sensors api endpoint handler
-   * @param {Req} _req [description]
-   * @param {Res} res  [description]
+   * GET /sensors api endpoint handler
    */
-  handle(_req: Req, res: Res) {
-    const paramsAndQuery = pathParse(_req);
-    const sensorName = paramsAndQuery.query?.sensorName;
+  async find(params: Params) {
+    console.debug("GET /sensors")
+
+    const sensorName = params?.query?.sensorName ?? null
     if (sensorName) {
+
       let sensorDetail = this.sensorService.getSensorByName(sensorName);
-      if (sensorDetail) {
-        res.reply = JSON.stringify(sensorDetail);
-      } else {
-        res.reply = JSON.stringify({ error: `Sensor with name '${sensorName}' not found.`});
-        res.status = 404;
-      }
+      console.debug(`Returns sensor by sensorName=${sensorName}`)
+      return sensorDetail
+
     } else {
-      res.reply = JSON.stringify(this.sensorService.getAllSensors());
+      console.debug("Returns all sensors")
+      return this.sensorService.getAllSensors()
     }
   }
 

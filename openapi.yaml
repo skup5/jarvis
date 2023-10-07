@@ -85,7 +85,8 @@ paths:
                         - name: humidity
                           value: "45"
                           units: "%"
-
+        '404':
+          description: no sensor was found for the given parameters
 #  /pet:
 #    put:
 #      tags:
