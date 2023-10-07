@@ -1,4 +1,4 @@
-import {SensorService} from "../../../src/modules/sensor/sensor.service"
+import {SensorService} from "../../../src/modules/sensor/sensor.service.ts"
 
 describe("SensorService", () => {
   let service: SensorService;
