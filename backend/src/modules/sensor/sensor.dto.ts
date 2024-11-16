@@ -1,6 +1,6 @@
-export interface Sensor {
-  id: String
-  name: String
-  description: String
-  location: String
+export type Sensor = {
+  id: string
+  name: string
+  description: string
+  location: string
 }

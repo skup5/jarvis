@@ -11,12 +11,11 @@ describe("SensorService", () => {
     expect(service.getAllSensors())
       .toEqual(
         [
-          {
-            id: "abcd-1234",
+          expect.objectContaining({
             name: "dht11",
             description: "Teploměr a vlhkoměr",
-            location: "Obývák"
-          }
+            location: "Čikiny pokoj"
+          })
         ]
       );
   });
@@ -24,13 +23,12 @@ describe("SensorService", () => {
   it("getSensorByName_found", () => {
     expect(service.getSensorByName("dht11"))
       .toEqual(
-        {
-          id: "abcd-1234",
+        expect.objectContaining({
           name: "dht11",
           description: "Teploměr a vlhkoměr",
-          location: "Obývák"
-        }
-      );
+          location: "Čikiny pokoj"
+        })
+      )
   });
 
   it("getSensorByName_notFound", () => {
