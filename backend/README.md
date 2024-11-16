@@ -41,9 +41,6 @@ Run via project npm script:
 # Run in DEV mode (starts with file watcher)
 npm run dev
 
-# Run in DEBUG mode (starts without file watcher, you can connect with Chrome inspect debugger)
-npm run debug
-
 # Run in PROD mode
 npm run start
 ```
@@ -54,18 +51,3 @@ Run via project npm script:
 # Run all tests in the current directory and all sub-directories
 npm run test
 ```
-Run tests directly via Deno:
-```
-# Run all tests in the current directory and all sub-directories
-???
-
-# Run all tests in the util directory
-???
-
-# Run just my_test.ts
-???
-
-# Run test modules in parallel
-???
-```
-

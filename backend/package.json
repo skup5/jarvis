@@ -5,7 +5,6 @@
   "main": "src/main.ts",
   "scripts": {
     "dev": "nodemon -x ts-node ./src/main.ts",
-    "debug": "deno run --inspect --allow-read --allow-net main.ts",
     "start": "npx ts-node ./src/main.ts",
     "test": "jest"
   },
