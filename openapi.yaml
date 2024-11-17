@@ -78,15 +78,32 @@ paths:
                       name: dht11
                       description: Teploměr a vlhkoměr
                       location: Obývák
-                      physicalQuantities:
-                        - name: temperatur
-                          value: "21"
-                          units: °C
-                        - name: humidity
-                          value: "45"
-                          units: "%"
         '404':
           description: no sensor was found for the given parameters
+
+  /sensors/{id}/measured-values:
+    get:
+      tags:
+        - api
+      description: Measured values of the specific sensor
+      parameters:
+        - name: id
+          in: path
+          description: Sensor identifier
+          schema:
+            type: string
+          required: true
+
+      responses:
+        200:
+          description: Measured values of the specific sensor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeasuredValue"
+
+        404:
+          description: There is now sensor with the given id
 #  /pet:
 #    put:
 #      tags:
@@ -650,6 +667,17 @@ paths:
 
 components:
   schemas:
+    MeasuredValue:
+      description: Current measured values of the sensor
+      type: object
+      properties:
+        sensorId:
+          type: string
+        physicalQuantities:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhysicalQuantity'
+
     Sensor:
       type: object
       properties:
@@ -661,10 +689,6 @@ components:
           type: string
         location:
           type: string
-        physicalQuantities:
-          type: array
-          items:
-            $ref: '#/components/schemas/PhysicalQuantity'
 
     PhysicalQuantity:
       type: object

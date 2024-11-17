@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "@feathersjs/feathers": "^5.0.10",
-    "@feathersjs/koa": "^5.0.10"
+    "@feathersjs/express": "^5.0.31"
   }
 }

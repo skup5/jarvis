@@ -1,4 +1,4 @@
-import {Params} from "@feathersjs/feathers";
+import {Id, Params} from "@feathersjs/feathers";
 import {SensorService} from "./sensor.service.ts"
 
 export class SensorController {
@@ -26,6 +26,18 @@ export class SensorController {
       console.debug("Returns all sensors")
       return this.sensorService.getAllSensors()
     }
+  }
+
+  async get(id: Id) {
+    console.debug(`GET /sensors/${id}`)
+
+    return this.sensorService.getSensorById(id.toString())
+  }
+
+  async getMeasuredValues(id: Id) {
+    console.debug(`GET /sensors/${id}/measured-values`)
+
+    return this.sensorService.getMeasuredValuesOfSensor(id.toString())
   }
 
 }

@@ -1,11 +1,10 @@
-import {feathers} from '@feathersjs/feathers'
-import {koa, rest, bodyParser, errorHandler, serveStatic} from '@feathersjs/koa'
-
-import {SensorController} from "./modules/sensor/sensor.controller.ts";
+import {feathers, Id, Params} from '@feathersjs/feathers'
+import express, {errorHandler, json, rest, serveStatic} from '@feathersjs/express'
 import {argv} from 'node:process';
 
+import {SensorController} from "./modules/sensor/sensor.controller.ts";
+
 // Jarvis backend server
-// @see https://deno.land/x/denorest@v4.2#examples
 
 
 const port = Number.isInteger(argv[2]) ? Number.parseInt(argv[2]) : 8080;
@@ -24,20 +23,31 @@ type ServiceTypes = {
 }
 
 // Creates an KoaJS compatible Feathers application
-const app = koa<ServiceTypes>(feathers())
+const app = express(feathers())
 
 // Use the current folder for static file hosting
 app.use(serveStatic('.'))
 // Register the error handle
 app.use(errorHandler())
 // Parse JSON request bodies
-app.use(bodyParser())
+app.use(json())
 
 // Register REST service handler
 app.configure(rest())
-// Register our messages service
-app.use('sensors', new SensorController())
 
+const sensorController = new SensorController();
+// Register our sensor REST controller
+app.use('sensors', sensorController)
+// Register custom endpoints
+app.use('sensors/:sensorId/measured-values', {
+  async get(id:Id, params: Params) {
+    return sensorController.getMeasuredValues(id)
+  },
+
+  async find(params: Params) {
+    return sensorController.getMeasuredValues(params.route?.sensorId)
+  }
+})
 
 // Start the server
 app.listen(port).then(() => console.log(`Feathers server listening on localhost:${port}`))
